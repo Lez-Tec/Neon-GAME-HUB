@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEON ARCADE - HTML5 Game Hub</title>
+  <meta name="description" content="A futuristic HTML5 Arcade Hub featuring classic games built with pure JavaScript, Canvas, dynamic Web Audio sound engine, and neon glassmorphism UI.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Dynamic Background Particle Canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <div class="app-container">
+    <!-- Navbar Header -->
+    <header class="navbar">
+      <div class="brand" id="nav-brand">
+        <div class="brand-icon">🎮</div>
+        <div class="brand-title">NEON ARCADE</div>
+      </div>
+      <div class="nav-actions">
+        <button class="nav-btn" id="sound-toggle-btn">🔊 Sound ON</button>
+        <button class="nav-btn" id="stats-modal-btn">📊 Arcade Stats</button>
+      </div>
+    </header>
+
+    <!-- HUB DASHBOARD VIEW -->
+    <main id="hub-view" class="view-section active">
+      <section class="hero-banner">
+        <h1 class="hero-title">SELECT YOUR <span>CHALLENGE</span></h1>
+        <p class="hero-subtitle">Choose from a collection of retro-futuristic HTML5 games. Track your high scores and dominate the arcade!</p>
+        <div class="quick-stats-strip">
+          <div class="stat-pill">GAMES AVAILABLE: <strong>6</strong></div>
+          <div class="stat-pill">TOTAL PLAYS: <strong id="total-plays-count">0</strong></div>
+          <div class="stat-pill">AUDIO: <strong>WEB AUDIO SYNTH</strong></div>
+        </div>
+      </section>
+
+      <section class="games-grid">
+        <!-- Game 1: Snake -->
+        <article class="game-card" data-game="snake" style="--card-accent: #00f0ff; --card-glow: rgba(0, 240, 255, 0.3);">
+          <div class="game-thumbnail">
+            <span class="game-thumbnail-icon">🐍</span>
+            <span class="game-badge">CLASSIC</span>
+          </div>
+          <div class="game-info">
+            <h2 class="game-name">Neon Snake Core</h2>
+            <p class="game-desc">Navigate the neon grid, eat glowing energy orbs, avoid walls and your own tail in this fast-paced classic.</p>
+            <div class="game-meta">
+              <span class="high-score-tag">HIGH SCORE: <strong id="score-snake">0</strong></span>
+              <button class="play-btn">PLAY NOW</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Game 2: Brick Breaker -->
+        <article class="game-card" data-game="brickbreaker" style="--card-accent: #ff0055; --card-glow: rgba(255, 0, 85, 0.3);">
+          <div class="game-thumbnail">
+            <span class="game-thumbnail-icon">🧱</span>
+            <span class="game-badge">ACTION</span>
+          </div>
+          <div class="game-info">
+            <h2 class="game-name">Cyber Brick Breaker</h2>
+            <p class="game-desc">Smash neon bricks, collect laser and multi-ball powerups, and clear escalating wave levels.</p>
+            <div class="game-meta">
+              <span class="high-score-tag">HIGH SCORE: <strong id="score-brickbreaker">0</strong></span>
+              <button class="play-btn">PLAY NOW</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Game 3: Pong -->
+        <article class="game-card" data-game="pong" style="--card-accent: #ffe600; --card-glow: rgba(255, 230, 0, 0.3);">
+          <div class="game-thumbnail">
+            <span class="game-thumbnail-icon">🏓</span>
+            <span class="game-badge">ARCADE</span>
+          </div>
+          <div class="game-info">
+            <h2 class="game-name">Galactic Pong</h2>
+            <p class="game-desc">High-velocity cyber table tennis featuring responsive AI tracking and dynamic spin physics.</p>
+            <div class="game-meta">
+              <span class="high-score-tag">HIGH SCORE: <strong id="score-pong">0</strong></span>
+              <button class="play-btn">PLAY NOW</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Game 4: Memory Matrix -->
+        <article class="game-card" data-game="memory" style="--card-accent: #7000ff; --card-glow: rgba(112, 0, 255, 0.3);">
+          <div class="game-thumbnail">
+            <span class="game-thumbnail-icon">🧠</span>
+            <span class="game-badge">PUZZLE</span>
+          </div>
+          <div class="game-info">
+            <h2 class="game-name">Memory Matrix</h2>
+            <p class="game-desc">Test your memory capacity by matching cosmic symbols in record time with combo multipliers.</p>
+            <div class="game-meta">
+              <span class="high-score-tag">HIGH SCORE: <strong id="score-memory">0</strong></span>
+              <button class="play-btn">PLAY NOW</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Game 5: Cosmic Flappy -->
+        <article class="game-card" data-game="flappy" style="--card-accent: #00ff66; --card-glow: rgba(0, 255, 102, 0.3);">
+          <div class="game-thumbnail">
+            <span class="game-thumbnail-icon">🚀</span>
+            <span class="game-badge">FLIGHT</span>
+          </div>
+          <div class="game-info">
+            <h2 class="game-name">Cosmic Flappy</h2>
+            <p class="game-desc">Thrust your glowing ship through hazardous neon warp gates and harvest energy stars.</p>
+            <div class="game-meta">
+              <span class="high-score-tag">HIGH SCORE: <strong id="score-flappy">0</strong></span>
+              <button class="play-btn">PLAY NOW</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Game 6: 2048 Fusion -->
+        <article class="game-card" data-game="2048" style="--card-accent: #ff00aa; --card-glow: rgba(255, 0, 170, 0.3);">
+          <div class="game-thumbnail">
+            <span class="game-thumbnail-icon">🔢</span>
+            <span class="game-badge">LOGIC</span>
+          </div>
+          <div class="game-info">
+            <h2 class="game-name">2048 Fusion</h2>
+            <p class="game-desc">Slide and combine matching tiles to reach the legendary 2048 energy core tile!</p>
+            <div class="game-meta">
+              <span class="high-score-tag">HIGH SCORE: <strong id="score-2048">0</strong></span>
+              <button class="play-btn">PLAY NOW</button>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <!-- PLAY GAME VIEW -->
+    <main id="play-view" class="view-section">
+      <div class="game-header-bar">
+        <button class="back-to-hub-btn" id="back-to-hub">⬅ ARCADE HUB</button>
+        <h2 class="current-game-title" id="game-title-text">GAME TITLE</h2>
+        <div class="game-score-board">
+          <div class="score-box">
+            <label>SCORE</label>
+            <span id="current-score">0</span>
+          </div>
+          <div class="score-box">
+            <label>BEST</label>
+            <span id="stage-high-score">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-wrapper">
+        <!-- Canvas Game Container -->
+        <canvas id="game-canvas"></canvas>
+
+        <!-- DOM Game Container (for Memory & 2048) -->
+        <div id="dom-game-stage" class="dom-game-container" style="display: none;"></div>
+
+        <!-- Game Overlay (Game Over / Victory / Pause) -->
+        <div id="game-overlay" class="game-overlay hidden">
+          <h2 class="overlay-title" id="overlay-title-text">GAME OVER</h2>
+          <p class="overlay-subtitle" id="overlay-subtitle-text">Final Score Achieved!</p>
+          <div class="overlay-score-display">
+            SCORE: <strong id="overlay-score-val">0</strong>
+          </div>
+          <div class="action-btn-group">
+            <button class="btn-arcade" id="overlay-restart-btn">PLAY AGAIN 🔄</button>
+            <button class="btn-arcade btn-secondary" id="overlay-hub-btn">ARCADE HUB 🏠</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls-hint-bar">
+        <span>🎮 CONTROLS:</span>
+        <span id="controls-hint-text">Use keyboard or mouse controls to play.</span>
+      </div>
+    </main>
+
+    <!-- ARCADE STATS MODAL -->
+    <div class="modal-backdrop" id="stats-modal">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h3 class="modal-title">📊 ARCADE STATISTICS</h3>
+          <button class="modal-close-btn" id="close-stats-btn">&times;</button>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Your lifetime play records and personal high scores saved in your browser local storage.</p>
+
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th>GAME</th>
+              <th style="text-align: right;">PLAYS</th>
+              <th style="text-align: right;">HIGH SCORE</th>
+            </tr>
+          </thead>
+          <tbody id="stats-table-body">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+
+        <div style="margin-top: 24px; text-align: right;">
+          <button class="btn-arcade btn-secondary" id="reset-stats-btn" style="font-size: 0.8rem; padding: 8px 16px;">RESET ALL STATS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>NEON ARCADE HUB &copy; 2026 — Built with HTML5 Canvas, Web Audio API, and Vanilla JS</p>
+    </footer>
+  </div>
+
+  <!-- Game Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/games/snake.js"></script>
+  <script src="js/games/brickbreaker.js"></script>
+  <script src="js/games/pong.js"></script>
+  <script src="js/games/memory.js"></script>
+  <script src="js/games/flappy.js"></script>
+  <script src="js/games/2048.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
